@@ -1,0 +1,43 @@
+tsb:
+  db_name : "CoreMemory"
+  tbl_name: "ModelMemory"
+
+msk:
+  sg_name         : "tf-msk-sg"
+  conf_name       : "anaplan-msk-cluster-configurations"
+  log_gp_name     : "anaplan-msk-log-group"
+  msk_name        : "anaplan-msk-cluster"
+  event_topic_name: "ModelEvent"
+
+glue:
+  registry_name : "core-server"
+  schema_name   : "core-memory-usage"
+
+crs:
+ sg_name: "tf-core-sizing-lambda-sg"
+ iam:
+  lambda_role_name                : "core-sizing-lambda-role"
+  lambda_perm_policy_name         : "msk-core-sizing-lambda-permission-policy"
+  lambda_persist_role_name        : "msk-core-memory-persister-lambda-role"
+  lambda_persist_perm_policy_name : "msk-core-memory-persister-lambda-permission-policy"
+  lambda_log_role_name            : "msk-core-memory-persister-lambda-logging"
+ cwatch:
+  sizing_promtail_filter_name   : "sizing-service-promtail-filter"
+  persister_promtail_filter_name: "persister-promtail-filter"
+ s3:
+  core_sizing_msk_code_repo: "core-sizing-msk-code-repo" #"core-sizing-msk-code-repo"
+ lambda:
+  core_sizing_lambda_fun_name                       : "core-sizing-lambda"
+  core_sizing_lambda_alias_name                     : "sizing-alias"
+  core_sizing_lambda_otel_service_name              : "core-sizing-service"
+  core_sizing_msk_lambda_persister_name             : "kafka-core-memory-persister"
+  core_sizing_msk_lambda_persister_otel_service_name: "core-sizing-persister"
+  core_sizing_msk_lambda_persister_alias_name       : "persister-alias"
+ loadbalancer:
+  core_sizing_lb_name                 : "core-sizing-lb"
+  core_sizing_lb_target_group_name    : "core-sizing-target-group"
+  core_sizing_msk_lb_name             : "msk-lb"
+  core_sizing_msk_lb_target_group_name: "msk-target-group"
+
+
+
